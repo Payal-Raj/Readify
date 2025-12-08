@@ -45,22 +45,7 @@
                 <Font name="Arial Black" size="12.0"/>
             </font>
         </Button>
-        <Button
-                layoutX="200" layoutY="341"
-                prefWidth="95" prefHeight="42"
-                text="Student"
-                wrapText="true"
-                onMouseEntered="#onHover"
-                onMouseExited="#onExit"
-                style="
-                    -fx-background-color: #FFFFFF;
-                    -fx-text-fill: #2A4759;
-                    -fx-font-weight: bold;
-                    -fx-border-radius: 10px;
-                    -fx-background-radius: 10px;
-                    -fx-border-color: transparent;
-                    -fx-cursor: hand;
-                ">
+        <Button layoutX="200" layoutY="341" onMouseEntered="#onHover" onMouseExited="#onExit" prefHeight="42" prefWidth="95" style="                     -fx-background-color: #FFFFFF;                     -fx-text-fill: #2A4759;                     -fx-font-weight: bold;                     -fx-border-radius: 10px;                     -fx-background-radius: 10px;                     -fx-border-color: transparent;                     -fx-cursor: hand;                 " text="Student" wrapText="true">
             <font>
                 <Font name="Arial Black" size="12.0"/>
             </font>
