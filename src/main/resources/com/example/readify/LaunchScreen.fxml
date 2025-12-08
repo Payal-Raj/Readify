@@ -28,12 +28,12 @@
         </ImageView>
 
 
-        <Button layoutX="80" layoutY="341" onMouseEntered="#onHover" onMouseExited="#onExit" prefHeight="42" prefWidth="95" style="                     -fx-background-color: #FFFFFF;                     -fx-text-fill: #2A4759;                     -fx-font-weight: bold;                     -fx-border-radius: 10px;                     -fx-background-radius: 10px;                     -fx-border-color: transparent;                     -fx-cursor: hand;                 " text="Admin" wrapText="true">
+        <Button fx:id="LaunchAdmin" layoutX="80" layoutY="341" onAction="#handleAdminLaunch" onMouseEntered="#onHover" onMouseExited="#onExit" prefHeight="42" prefWidth="95" style="                     -fx-background-color: #FFFFFF;                     -fx-text-fill: #2A4759;                     -fx-font-weight: bold;                     -fx-border-radius: 10px;                     -fx-background-radius: 10px;                     -fx-border-color: transparent;                     -fx-cursor: hand;                 " text="Admin" wrapText="true">
             <font>
                 <Font name="Arial Black" size="12.0" />
             </font>
         </Button>
-        <Button layoutX="200" layoutY="341" onMouseEntered="#onHover" onMouseExited="#onExit" prefHeight="42" prefWidth="95" style="                     -fx-background-color: #FFFFFF;                     -fx-text-fill: #2A4759;                     -fx-font-weight: bold;                     -fx-border-radius: 10px;                     -fx-background-radius: 10px;                     -fx-border-color: transparent;                     -fx-cursor: hand;                 " text="Student" wrapText="true">
+        <Button fx:id="LaunchStudent" layoutX="200" layoutY="341" onAction="#handleStudentLaunch" onMouseEntered="#onHover" onMouseExited="#onExit" prefHeight="42" prefWidth="95" style="                     -fx-background-color: #FFFFFF;                     -fx-text-fill: #2A4759;                     -fx-font-weight: bold;                     -fx-border-radius: 10px;                     -fx-background-radius: 10px;                     -fx-border-color: transparent;                     -fx-cursor: hand;                 " text="Student" wrapText="true">
             <font>
                 <Font name="Arial Black" size="12.0" />
             </font>
