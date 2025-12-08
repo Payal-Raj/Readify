@@ -18,7 +18,9 @@ public class LaunchScreenController {
     public void onExit(javafx.scene.input.MouseEvent event) {
         ((Button) event.getSource()).setStyle(
                 "-fx-background-color: #FFFFFF; " +
-                        "-fx-text-fill: #2A4759; "
+                        "-fx-text-fill: #2A4759; " +
+                        "-fx-border-radius: 10px; " +
+                        "-fx-background-radius: 10px;"
         );
     }
 }
