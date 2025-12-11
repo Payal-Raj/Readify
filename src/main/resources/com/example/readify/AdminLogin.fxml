@@ -12,86 +12,95 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.readify.AdminLoginController">
+<?import javafx.scene.layout.StackPane?>
+<StackPane fx:id="rootPane" prefHeight="600.0" prefWidth="800.0"
+           xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.readify.AdminLoginController">
    <children>
-      <HBox prefHeight="607.0" prefWidth="802.0">
+      <AnchorPane prefHeight="600.0" prefWidth="800.0">
          <children>
-            <VBox prefHeight="607.0" prefWidth="455.0" style="-fx-background-color: #2A4759;">
+            <HBox prefHeight="607.0" prefWidth="802.0">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin  Login" wrappingWidth="233.33671951293945">
-                     <VBox.margin>
-                        <Insets left="90.0" top="100.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="Cambria Bold" size="36.0" />
-                     </font>
-                  </Text>
-                  <Text fill="WHITE" layoutX="100.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="233.33671951293945">
-                     <font>
-                        <Font name="Cambria Bold" size="22.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="40.0" top="60.0" />
-                     </VBox.margin>
-                  </Text>
-                  <TextField fx:id="AdminUserName" prefHeight="26.0" prefWidth="363.0" promptText="username">
-                     <VBox.margin>
-                        <Insets left="40.0" right="40.0" top="20.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-                     </padding>
-                  </TextField>
-                  <Text fill="WHITE" layoutX="50.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="233.33671951293945">
-                     <font>
-                        <Font name="Cambria Bold" size="22.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="40.0" top="40.0" />
-                     </VBox.margin>
-                  </Text>
-                  <PasswordField fx:id="AdminPassword" promptText="password">
-                     <VBox.margin>
-                        <Insets left="40.0" right="40.0" top="20.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-                     </padding>
-                  </PasswordField>
-                  <Button fx:id="AdminLoginBtn" mnemonicParsing="false" onAction="#handleAdminLogin" style="-fx-background-color: #DDDDDD; -fx-text-fill: #2A4759; -fx-background-radius: 15;" text="Login">
-                     <VBox.margin>
-                        <Insets left="160.0" top="50.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="7.0" left="15.0" right="15.0" top="7.0" />
-                     </padding>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
+                  <VBox prefHeight="607.0" prefWidth="455.0" style="-fx-background-color: #2A4759;">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin  Login" wrappingWidth="233.33671951293945">
+                           <VBox.margin>
+                              <Insets left="90.0" top="100.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Cambria Bold" size="36.0" />
+                           </font>
+                        </Text>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="233.33671951293945">
+                           <font>
+                              <Font name="Cambria Bold" size="22.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="40.0" top="60.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextField fx:id="AdminUserName" prefHeight="26.0" prefWidth="363.0" promptText="username">
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" top="20.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </padding>
+                        </TextField>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="233.33671951293945">
+                           <font>
+                              <Font name="Cambria Bold" size="22.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="40.0" top="40.0" />
+                           </VBox.margin>
+                        </Text>
+                        <PasswordField fx:id="AdminPassword" promptText="password">
+                           <VBox.margin>
+                              <Insets left="40.0" right="40.0" top="20.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </padding>
+                        </PasswordField>
+                        <Button fx:id="AdminLoginBtn" mnemonicParsing="false" onAction="#handleAdminLogin"
+                                style="-fx-background-color: #DDDDDD; -fx-text-fill: #2A4759; -fx-background-radius: 15;"
+                                text="Login">
+                           <VBox.margin>
+                              <Insets left="160.0" top="50.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="7.0" left="15.0" right="15.0" top="7.0" />
+                           </padding>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="607.0" prefWidth="400.0" style="-fx-background-color: #DDDDDD;">
+                     <children>
+                        <ImageView fx:id="closeTab" fitHeight="51.0" fitWidth="56.0" onMouseClicked="#onCloseTab" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/CloseTab.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets left="350.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <ImageView fitHeight="399.0" fitWidth="425.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/AdminLoginCover.png" />
+                           </image>
+                           <VBox.margin>
+                              <Insets top="60.0" />
+                           </VBox.margin>
+                        </ImageView>
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
-            <VBox prefHeight="607.0" prefWidth="400.0" style="-fx-background-color: #DDDDDD;">
-               <children>
-                  <ImageView fx:id="closeTab" fitHeight="51.0" fitWidth="56.0" onMouseClicked="#onCloseTab" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Images/CloseTab.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets left="350.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <ImageView fitHeight="399.0" fitWidth="425.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Images/AdminLoginCover.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets top="60.0" />
-                     </VBox.margin>
-                  </ImageView>
-               </children>
-            </VBox>
+            </HBox>
          </children>
-      </HBox>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>
