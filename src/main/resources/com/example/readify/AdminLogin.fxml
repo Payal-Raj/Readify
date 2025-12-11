@@ -58,7 +58,7 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </padding>
                   </PasswordField>
-                  <Button fx:id="AdminLoginBtn" mnemonicParsing="false" style="-fx-background-color: #DDDDDD; -fx-text-fill: #2A4759; -fx-background-radius: 15;" text="Login">
+                  <Button fx:id="AdminLoginBtn" mnemonicParsing="false" onAction="#handleAdminLogin" style="-fx-background-color: #DDDDDD; -fx-text-fill: #2A4759; -fx-background-radius: 15;" text="Login">
                      <VBox.margin>
                         <Insets left="160.0" top="50.0" />
                      </VBox.margin>
@@ -73,7 +73,7 @@
             </VBox>
             <VBox prefHeight="607.0" prefWidth="400.0" style="-fx-background-color: #DDDDDD;">
                <children>
-                  <ImageView fitHeight="51.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="closeTab" fitHeight="51.0" fitWidth="56.0" onMouseClicked="#onCloseTab" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Images/CloseTab.png" />
                      </image>
