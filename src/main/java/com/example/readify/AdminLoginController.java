@@ -38,10 +38,17 @@ public class AdminLoginController {
 
         if (username.equals(ADMIN_USERNAME) && password.equals(ADMIN_PASSWORD)) {
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("/com/example/readify/AdminDashboard.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/readify/AdminDashboard.fxml"));
+                Parent adminDashboardRoot = loader.load();
+
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(root));
+                stage.setScene(new Scene(adminDashboardRoot, 800, 600));
+                stage.setTitle("Admin Dashboard");
+                stage.setResizable(false);
+
+// Show the stage
                 stage.show();
+
 
             } catch (Exception e) {
                 e.printStackTrace();
