@@ -1,8 +1,17 @@
 package com.example.readify;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.geometry.Insets;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+
 
 public class AdminDashboardController {
 
@@ -24,6 +33,20 @@ public class AdminDashboardController {
     private boolean isExpanded = false;
 
     @FXML
+    private VBox card1;
+
+    @FXML
+    private VBox card2;
+
+
+    private void setCardMargins(double left, double right) {
+        Insets newInsets = new Insets(0, right, 0, left);
+
+        HBox.setMargin(card1, newInsets);
+        HBox.setMargin(card2, newInsets);
+    }
+
+    @FXML
     private void expandMenu() {
         if (!isExpanded) {
             isExpanded = true;
@@ -32,6 +55,8 @@ public class AdminDashboardController {
             viewMembersLabel.setVisible(true);
             viewBooksLabel.setVisible(true);
             addLabel.setVisible(true);
+
+            setCardMargins(10, 10);
         }
     }
 
@@ -44,9 +69,22 @@ public class AdminDashboardController {
             viewMembersLabel.setVisible(false);
             viewBooksLabel.setVisible(false);
             addLabel.setVisible(false);
+
+            setCardMargins(60, 20);
         }
     }
+    @FXML
+    public void handleAdminLogOut(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/readify/launchScreen.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     private void AddMember() {
