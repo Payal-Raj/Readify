@@ -1,16 +1,17 @@
 package com.example.readify;
 import com.example.readify.Database.DBConnection;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.sql.Connection;
@@ -20,6 +21,7 @@ import java.sql.SQLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import javafx.scene.text.Text;
 
 public class AddMemberController implements Initializable {
 
@@ -29,6 +31,8 @@ public class AddMemberController implements Initializable {
     @FXML private TextArea addressField;
     @FXML private ComboBox<String> membershipBox;
     @FXML private DatePicker joinDatePicker;
+    @FXML
+    private StackPane stackPane;
 
 
     @Override
@@ -62,6 +66,16 @@ public class AddMemberController implements Initializable {
         }
     }
 
+    private void clearFields() {
+        nameField.clear();
+        emailField.clear();
+        phoneField.clear();
+        addressField.clear();
+        membershipBox.getSelectionModel().clearSelection();
+        joinDatePicker.setValue(LocalDate.now());
+    }
+
+
     @FXML
     private void handleSaveMember() {
         String name = nameField.getText();
@@ -72,16 +86,41 @@ public class AddMemberController implements Initializable {
         LocalDate joinDate = joinDatePicker.getValue();
 
         // Validation
-        if (name.isEmpty() || email.isEmpty() || phone.isEmpty()
-                || address.isEmpty() || membership == null || joinDate == null) {
-            System.out.println("Please fill all required fields!");
+        if (name.isEmpty()) {
+            showJFXAlert("Validation Error", "Please enter the full name.");
+            return;
+        }
+        if (email.isEmpty()) {
+            showJFXAlert("Validation Error", "Please enter the email.");
+            return;
+        }
+        if (phone.isEmpty()) {
+            showJFXAlert("Validation Error", "Please enter the phone number.");
+            return;
+        }
+        if (address.isEmpty()) {
+            showJFXAlert("Validation Error", "Please enter the address.");
+            return;
+        }
+        if (membership == null) {
+            showJFXAlert("Validation Error", "Please select a membership type.");
+            return;
+        }
+        if (joinDate == null) {
+            showJFXAlert("Validation Error", "Please select the join date.");
             return;
         }
 
         // Save to DB
-        addMember(name, email, phone, address, membership, joinDate);
+        try {
+            addMember(name, email, phone, address, membership, joinDate);
+            showJFXAlert("Success", "Member added successfully!");
+            clearFields();
+        } catch (Exception e) {
+            showJFXAlert("Error", "Failed to add member. Try again.");
+            e.printStackTrace();
+        }
     }
-
 
 
     @FXML
@@ -104,4 +143,24 @@ public class AddMemberController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    private void showJFXAlert(String title, String message) {
+        // Create dialog content
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setHeading(new Text(title));
+        content.setBody(new Text(message));
+
+        // Create dialog
+        JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
+
+        // Add OK button
+        JFXButton okButton = new JFXButton("OK");
+        okButton.setStyle("-fx-background-color:#1ABC9C; -fx-text-fill:white; -fx-background-radius:5;");
+        okButton.setOnAction(event -> dialog.close()); // close dialog on click
+
+        content.setActions(okButton);
+
+        dialog.show();
+    }
+
 }
