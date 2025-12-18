@@ -12,6 +12,8 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 
 public class AdminDashboardController {
 
@@ -86,9 +88,21 @@ public class AdminDashboardController {
         }
     }
 
+
+    private void loadUI(String fxml) {
+        try {
+            mainContent.getChildren().clear();
+            Parent ui = FXMLLoader.load(getClass().getResource(fxml));
+            mainContent.getChildren().add(ui);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     private void AddMember() {
         mainContent.getChildren().clear();
+        loadUI("/com/example/readify/AddMember.fxml");
     }
 
     @FXML

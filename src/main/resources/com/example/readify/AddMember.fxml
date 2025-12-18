@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="600.0" prefWidth="754.0" style="-fx-background-color: linear-gradient(to bottom, #2A4759, #1F3B4D);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.readify.AddMemberController">
+    <children>
+        <!-- Header -->
+        <Label text="Add Member" textAlignment="CENTER" textFill="WHITE" AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <font>
+                <Font name="Arial Black" size="36.0"/>
+            </font>
+        </Label>
+        <Separator layoutY="80.0" prefWidth="754.0" AnchorPane.topAnchor="80.0"/>
+
+        <!-- Form -->
+<!--        <GridPane layoutX="94.0" layoutY="120.0" hgap="20" vgap="15" padding="Insets(20, 20, 20, 20)">-->
+
+<!--            &lt;!&ndash; Full Name &ndash;&gt;-->
+<!--            <Label text="Full Name:" textFill="WHITE" GridPane.rowIndex="0" GridPane.columnIndex="0"/>-->
+<!--            <JFXTextField fx:id="nameField" promptText="Enter full name" GridPane.rowIndex="0" GridPane.columnIndex="1"/>-->
+
+<!--            &lt;!&ndash; Email &ndash;&gt;-->
+<!--            <Label text="Email:" textFill="WHITE" GridPane.rowIndex="1" GridPane.columnIndex="0"/>-->
+<!--            <JFXTextField fx:id="emailField" promptText="Enter email" GridPane.rowIndex="1" GridPane.columnIndex="1"/>-->
+
+<!--            &lt;!&ndash; Phone &ndash;&gt;-->
+<!--            <Label text="Phone:" textFill="WHITE" GridPane.rowIndex="2" GridPane.columnIndex="0"/>-->
+<!--            <JFXTextField fx:id="phoneField" promptText="Enter phone number" GridPane.rowIndex="2" GridPane.columnIndex="1"/>-->
+
+<!--            &lt;!&ndash; Address &ndash;&gt;-->
+<!--            <Label text="Address:" textFill="WHITE" GridPane.rowIndex="3" GridPane.columnIndex="0"/>-->
+<!--            <JFXTextArea fx:id="addressField" promptText="Enter address" prefRowCount="2" GridPane.rowIndex="3" GridPane.columnIndex="1"/>-->
+
+<!--            &lt;!&ndash; Membership Type &ndash;&gt;-->
+<!--            <Label text="Membership Type:" textFill="WHITE" GridPane.rowIndex="4" GridPane.columnIndex="0"/>-->
+<!--            <JFXComboBox fx:id="membershipBox" promptText="Select type" GridPane.rowIndex="4" GridPane.columnIndex="1"/>-->
+
+<!--            &lt;!&ndash; Join Date &ndash;&gt;-->
+<!--            <Label text="Join Date:" textFill="WHITE" GridPane.rowIndex="5" GridPane.columnIndex="0"/>-->
+<!--            <DatePicker fx:id="joinDatePicker" GridPane.rowIndex="5" GridPane.columnIndex="1"/>-->
+
+<!--            &lt;!&ndash; Save Button &ndash;&gt;-->
+<!--            <JFXButton text="Save Member"-->
+<!--                       onAction="#handleSaveMember"-->
+<!--                       buttonType="RAISED"-->
+<!--                       style="-fx-background-color:#1ABC9C; -fx-text-fill:white; -fx-background-radius:10; -fx-cursor: hand;"-->
+<!--                       GridPane.rowIndex="6" GridPane.columnIndex="1"/>-->
+<!--        </GridPane>-->
+    </children>
+</AnchorPane>
