@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.readify.AddBookController">
+    <AnchorPane prefHeight="600.0" prefWidth="754.0" style="-fx-background-color: linear-gradient(to bottom, #2A4759, #1F3B4D);">
+        <children>
+            <!-- Header -->
+            <Label text="Add Book" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+                <font>
+                    <Font name="Arial Black" size="36.0" />
+                </font>
+            </Label>
+            <ImageView fx:id="closeTab" fitHeight="35.0" fitWidth="36.0" layoutX="14.0" layoutY="20.0" onMouseClicked="#onCloseTab" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@Images/leftArrow.png" />
+                </image>
+            </ImageView>
+            <Separator layoutY="80.0" prefWidth="754.0" AnchorPane.topAnchor="80.0" />
+            <JFXButton fx:id="adminLogOut" layoutX="678.0" layoutY="24.0" onMouseClicked="#handleAdminLogOut" style="-fx-background-color: #DDDDDD;" text="Log Out">
+                <font>
+                    <Font name="Arial Black" size="12.0" />
+                </font>
+                <padding>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </padding>
+            </JFXButton>
+
+            <!-- Form -->
+            <GridPane hgap="20" layoutX="117.0" layoutY="125.0" prefHeight="389.0" prefWidth="528.0" style="                   -fx-background-color: #F5F7FA;                   -fx-background-radius: 16;                   -fx-border-radius: 16;                   -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 20, 0.3, 0, 6);           " vgap="18" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="110.0">
+
+
+                <!-- Column widths -->
+                <columnConstraints>
+                    <ColumnConstraints maxWidth="232.0" minWidth="117.0" prefWidth="117.0" />
+                    <ColumnConstraints maxWidth="263.0" minWidth="148.0" prefWidth="263.0" />
+                    <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+                    <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+                </columnConstraints>
+
+                <!-- Full Name -->
+                <!-- Book ID -->
+                <Label style="-fx-font-size:13; -fx-font-weight:bold; -fx-text-fill:#333333;" text="Book ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+
+                <TextField fx:id="bookIdField" promptText="Enter book ID" style="-fx-background-color:white; -fx-background-radius:8;            -fx-border-color:#CCCCCC; -fx-border-radius:8; -fx-padding:6 10;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <!-- Title -->
+                <Label style="-fx-font-size:13; -fx-font-weight:bold; -fx-text-fill:#333333;" text="Title:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+
+                <TextField fx:id="titleField" promptText="Enter book title" style="-fx-background-color:white; -fx-background-radius:8;            -fx-border-color:#CCCCCC; -fx-border-radius:8; -fx-padding:6 10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <!-- Author -->
+                <Label style="-fx-font-size:13; -fx-font-weight:bold; -fx-text-fill:#333333;" text="Author:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+
+                <TextField fx:id="authorField" promptText="Enter author name" style="-fx-background-color:white; -fx-background-radius:8;            -fx-border-color:#CCCCCC; -fx-border-radius:8; -fx-padding:6 10;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <!-- Category -->
+                <Label style="-fx-font-size:13; -fx-font-weight:bold; -fx-text-fill:#333333;" text="Category:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+
+                <ComboBox fx:id="categoryBox" prefWidth="320" promptText="Select category" style="-fx-background-radius:8; -fx-border-radius:8;           -fx-border-color:#CCCCCC;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                <!-- Publisher -->
+                <Label style="-fx-font-size:13; -fx-font-weight:bold; -fx-text-fill:#333333;" text="Publisher:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+
+                <TextField fx:id="publisherField" promptText="Enter publisher" style="-fx-background-color:white; -fx-background-radius:8;            -fx-border-color:#CCCCCC; -fx-border-radius:8; -fx-padding:6 10;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                <!-- ISBN -->
+                <Label style="-fx-font-size:13; -fx-font-weight:bold; -fx-text-fill:#333333;" text="ISBN:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+
+                <TextField fx:id="isbnField" promptText="Enter ISBN" style="-fx-background-color:white; -fx-background-radius:8;            -fx-border-color:#CCCCCC; -fx-border-radius:8; -fx-padding:6 10;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                <!-- Copies -->
+                <Label style="-fx-font-size:13; -fx-font-weight:bold; -fx-text-fill:#333333;" text="Total Copies:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+
+                <TextField fx:id="copiesField" promptText="Enter total copies" style="-fx-background-color:white; -fx-background-radius:8;            -fx-border-color:#CCCCCC; -fx-border-radius:8; -fx-padding:6 10;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+                <!-- Status -->
+                <Label style="-fx-font-size:13; -fx-font-weight:bold; -fx-text-fill:#333333;" text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+
+                <ComboBox fx:id="statusBox" prefWidth="320" promptText="Select status" style="-fx-background-radius:8; -fx-border-radius:8;           -fx-border-color:#CCCCCC;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
+                <!-- Date Added -->
+                <Label style="-fx-font-size:13; -fx-font-weight:bold; -fx-text-fill:#333333;" text="Date Added:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+
+                <DatePicker fx:id="dateAddedPicker" prefWidth="320" style="-fx-background-radius:8; -fx-border-radius:8;             -fx-border-color:#CCCCCC;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+
+                <!-- Save Button -->
+                <Button onAction="#handleSaveBook" prefWidth="160" style="-fx-background-color:#1ABC9C; -fx-text-fill:white;         -fx-font-size:14; -fx-font-weight:bold; -fx-background-radius:10;         -fx-cursor:hand;         -fx-effect:dropshadow(gaussian, rgba(0,0,0,0.25), 8, 0.3, 0, 3);" text="Save Book" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <padding>
+                    <Insets bottom="20.0" left="20.0" top="20.0" />
+                </padding>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+
+            </GridPane>
+
+        </children>
+    </AnchorPane>
+</StackPane>
