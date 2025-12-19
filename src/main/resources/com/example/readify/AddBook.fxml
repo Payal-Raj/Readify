@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.readify.AddBookController">
+<StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.readify.AddBookController">
     <AnchorPane prefHeight="600.0" prefWidth="754.0" style="-fx-background-color: linear-gradient(to bottom, #2A4759, #1F3B4D);">
         <children>
             <!-- Header -->
@@ -42,7 +42,7 @@
             </JFXButton>
 
             <!-- Form -->
-            <GridPane hgap="20" layoutX="117.0" layoutY="125.0" prefHeight="389.0" prefWidth="528.0" style="                   -fx-background-color: #F5F7FA;                   -fx-background-radius: 16;                   -fx-border-radius: 16;                   -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 20, 0.3, 0, 6);           " vgap="18" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="110.0">
+            <GridPane hgap="20" layoutX="128.0" layoutY="93.0" prefHeight="389.0" prefWidth="528.0" style="                   -fx-background-color: #F5F7FA;                   -fx-background-radius: 16;                   -fx-border-radius: 16;                   -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 20, 0.3, 0, 6);           " vgap="18" AnchorPane.bottomAnchor="57.0" AnchorPane.rightAnchor="98.0" AnchorPane.topAnchor="93.0">
 
 
                 <!-- Column widths -->

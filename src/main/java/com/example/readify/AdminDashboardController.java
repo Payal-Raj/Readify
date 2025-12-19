@@ -108,5 +108,6 @@ public class AdminDashboardController {
     @FXML
     private void AddBook() {
         mainContent.getChildren().clear();
+        loadUI("/com/example/readify/AddBook.fxml");
     }
 }
