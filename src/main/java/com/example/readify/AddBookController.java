@@ -1,6 +1,8 @@
 package com.example.readify;
 
 import com.example.readify.Database.DBConnection;
+import com.example.readify.Manager.BookManager;
+import com.example.readify.Models.Book;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -152,6 +154,21 @@ public class AddBookController implements Initializable {
             return;
         }
 
+        Book book = new Book(
+                bookId,
+                title,
+                author,
+                category,
+                publisher,
+                isbn,
+                copies,
+                status,
+                dateAdded
+        );
+        if (!BookManager.addBook(book)) {
+            showJFXAlert("Error", "Book already exists.");
+            return;
+        }
 
         try {
             addBook(bookId, title, author, category, publisher, isbn, copies, status, dateAdded);

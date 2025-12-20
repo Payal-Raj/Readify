@@ -1,5 +1,7 @@
 package com.example.readify;
 import com.example.readify.Database.DBConnection;
+import com.example.readify.Manager.MemberManager;
+import com.example.readify.Models.Member;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -48,8 +50,8 @@ public class AddMemberController implements Initializable {
         joinDatePicker.setValue(LocalDate.now());
     }
 
-    public void addMember(String name, String email, String phone, String address,
-                          String membership, LocalDate joinDate, String password) {
+    public void saveMemberToDatabase(String name, String email, String phone, String address,
+                                     String membership, LocalDate joinDate, String password) {
         String sql = "INSERT INTO members (name, email, phone, address, membership, join_date, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
@@ -156,8 +158,22 @@ public class AddMemberController implements Initializable {
         }
 
 
+        Member member = new Member(
+                name,
+                email,
+                phone,
+                address,
+                membership,
+                joinDate,
+                password
+        );
+        if (!MemberManager.addMember(member)) {
+            showJFXAlert("Error", "Member already exists.");
+            return;
+        }
+
         try {
-            addMember(name, email, phone, address, membership, joinDate, password);
+            saveMemberToDatabase(name, email, phone, address, membership, joinDate, password);
             showJFXAlert("Success", "Member added successfully!");
             clearFields();
         } catch (Exception e) {
