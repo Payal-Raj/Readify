@@ -7,6 +7,7 @@ module com.example.readify {
 
     // Open packages containing FXML controllers
     opens com.example.readify to javafx.fxml;
+    opens com.example.readify.Models to javafx.base;
     opens com.example.readify.Start to javafx.fxml;  // for StartApp launcher if it uses FXML
 
     // Export packages for general access

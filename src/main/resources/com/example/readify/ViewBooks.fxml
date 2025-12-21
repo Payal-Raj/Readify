@@ -61,36 +61,26 @@
        <?import javafx.scene.control.TableView?>
        <?import javafx.scene.control.TableColumn?>
 
-       <ScrollPane layoutX="20.0"
-                   layoutY="170.0"
-                   prefWidth="720.0"
-                   prefHeight="420.0"
-                   hbarPolicy="AS_NEEDED"
-                   vbarPolicy="AS_NEEDED"
-                   fitToHeight="true"
-                   fitToWidth="false">
+       <TableView fx:id="booksTable"
+                  layoutX="20.0"
+                  layoutY="170.0"
+                  prefWidth="720.0"
+                  prefHeight="420.0">
 
-           <content>
-               <TableView fx:id="booksTable"
-                          prefWidth="1100.0"
-                          prefHeight="420.0">
+           <columns>
+               <TableColumn fx:id="colBookId" text="Book ID" prefWidth="120"/>
+               <TableColumn fx:id="colTitle" text="Title" prefWidth="180"/>
+               <TableColumn fx:id="colAuthor" text="Author" prefWidth="160"/>
+               <TableColumn fx:id="colCategory" text="Category" prefWidth="150"/>
+               <TableColumn fx:id="colPublisher" text="Publisher" prefWidth="150"/>
+               <TableColumn fx:id="colISBN" text="ISBN" prefWidth="160"/>
+               <TableColumn fx:id="colCopies" text="Copies" prefWidth="100"/>
+               <TableColumn fx:id="colStatus" text="Status" prefWidth="120"/>
+               <TableColumn fx:id="colDateAdded" text="Date Added" prefWidth="150"/>
+               <TableColumn fx:id="colActions" text="Actions" prefWidth="140"/>
+           </columns>
 
-                   <columns>
-                       <TableColumn fx:id="colBookId" text="Book ID" prefWidth="120"/>
-                       <TableColumn fx:id="colTitle" text="Title" prefWidth="180"/>
-                       <TableColumn fx:id="colAuthor" text="Author" prefWidth="160"/>
-                       <TableColumn fx:id="colCategory" text="Category" prefWidth="150"/>
-                       <TableColumn fx:id="colPublisher" text="Publisher" prefWidth="150"/>
-                       <TableColumn fx:id="colISBN" text="ISBN" prefWidth="160"/>
-                       <TableColumn fx:id="colCopies" text="Copies" prefWidth="100"/>
-                       <TableColumn fx:id="colStatus" text="Status" prefWidth="120"/>
-                       <TableColumn fx:id="colDateAdded" text="Date Added" prefWidth="150"/>
-                       <TableColumn fx:id="colActions" text="Actions" prefWidth="140"/>
-                   </columns>
-
-               </TableView>
-           </content>
-       </ScrollPane>
+       </TableView>
 
 
    </children>

@@ -30,4 +30,37 @@ public class Book {
     public String getBookId() {
         return bookId;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public int getTotalCopies() {
+        return totalCopies;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public LocalDate getDateAdded() {
+        return dateAdded;
+    }
+
 }
