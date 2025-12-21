@@ -1,16 +1,22 @@
 package com.example.readify;
 
+import com.example.readify.Database.DBConnection;
 import com.example.readify.Models.Book;
+import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -20,6 +26,16 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class ViewBooksController implements Initializable {
+
+    @FXML
+    private TextField searchField;
+    @FXML
+    private JFXComboBox<String> categoryCombo;
+    @FXML
+    private JFXComboBox<String> statusCombo;
+    @FXML private JFXComboBox<String> sortCombo;
+
+    private ObservableList<Book> booksList;
 
     @FXML
     private TableView<Book> booksTable;
@@ -52,36 +68,92 @@ public class ViewBooksController implements Initializable {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colDateAdded.setCellValueFactory(new PropertyValueFactory<>("dateAdded"));
         booksTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-        loadDummyData();
+
+        loadBooksFromDatabase();
+
+        categoryCombo.setItems(FXCollections.observableArrayList(
+                "Programming", "Science", "Literature", "History", "Islamic Studies"
+        ));
+        statusCombo.setItems(FXCollections.observableArrayList(
+                "Available", "Issued"
+        ));
+        sortCombo.setItems(FXCollections.observableArrayList(
+                "A-Z", "Z-A"
+        ));
+
+        implementSearchAndFilter();
     }
-    private void loadDummyData() {
-        ObservableList<Book> bookList = FXCollections.observableArrayList();
 
-        bookList.add(new Book(
-                "B001",
-                "Java Programming",
-                "Herbert Schildt",
-                "Programming",
-                "McGraw Hill",
-                "978-0071808552",
-                5,
-                "Available",
-                LocalDate.now()
-        ));
+    private void loadBooksFromDatabase() {
+        booksList = FXCollections.observableArrayList();
 
-        bookList.add(new Book(
-                "B002",
-                "Data Structures",
-                "Mark Allen Weiss",
-                "CS",
-                "Pearson",
-                "978-0133008429",
-                3,
-                "Issued",
-                LocalDate.now()
-        ));
+        try {
+            var conn = DBConnection.getConnection();
+            String query = "SELECT * FROM books";
+            var pst = conn.prepareStatement(query);
+            var rs = pst.executeQuery();
 
-        booksTable.setItems(bookList);
+            while (rs.next()) {
+                Book book = new Book(
+                        rs.getString("book_id"),
+                        rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getString("category"),
+                        rs.getString("publisher"),
+                        rs.getString("isbn"),
+                        rs.getInt("total_copies"),
+                        rs.getString("status"),
+                        rs.getDate("date_added").toLocalDate()
+                );
+                booksList.add(book);
+            }
+
+            booksTable.setItems(booksList);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void implementSearchAndFilter() {
+        FilteredList<Book> filteredData = new FilteredList<>(booksList, b -> true);
+
+        // Add listeners
+        searchField.textProperty().addListener((obs, oldVal, newVal) -> updateFilters(filteredData));
+        categoryCombo.valueProperty().addListener((obs, oldVal, newVal) -> updateFilters(filteredData));
+        statusCombo.valueProperty().addListener((obs, oldVal, newVal) -> updateFilters(filteredData));
+        sortCombo.valueProperty().addListener((obs, oldVal, newVal) -> updateFilters(filteredData));
+
+        SortedList<Book> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(booksTable.comparatorProperty());
+        booksTable.setItems(sortedData);
+    }
+
+    private void updateFilters(FilteredList<Book> filteredData) {
+        String searchText = searchField.getText() != null ? searchField.getText().toLowerCase() : "";
+        String category = categoryCombo.getValue();
+        String status = statusCombo.getValue();
+        String sortOrder = sortCombo.getValue();
+
+        filteredData.setPredicate(book -> {
+            boolean matchesSearch = book.getTitle().toLowerCase().contains(searchText);
+            boolean matchesCategory = (category == null || category.isEmpty()) || book.getCategory().equals(category);
+            boolean matchesStatus = (status == null || status.isEmpty()) || book.getStatus().equals(status);
+            return matchesSearch && matchesCategory && matchesStatus;
+        });
+
+        // Apply sort from Sort ComboBox
+        if (sortOrder != null) {
+            if (sortOrder.equals("A-Z")) {
+                booksTable.getSortOrder().clear();
+                colTitle.setSortType(TableColumn.SortType.ASCENDING);
+                booksTable.getSortOrder().add(colTitle);
+            } else if (sortOrder.equals("Z-A")) {
+                booksTable.getSortOrder().clear();
+                colTitle.setSortType(TableColumn.SortType.DESCENDING);
+                booksTable.getSortOrder().add(colTitle);
+            }
+        }
     }
 
     @FXML
