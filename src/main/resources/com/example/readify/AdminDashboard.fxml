@@ -38,7 +38,7 @@
                         <Image url="@Images/member.jpg" />
                      </image>
                   </ImageView>
-                  <Label fx:id="viewMembersLabel" text="View Members" visible="false" />
+                  <Label fx:id="viewMembersLabel" onMouseClicked="#viewMember" text="View Members" visible="false" />
                </children>
             </HBox>
 
@@ -59,7 +59,7 @@
                         <Image url="@Images/bookIcon.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="viewBooksLabel" text="View Books" visible="false" />
+                  <Label fx:id="viewBooksLabel" onMouseClicked="#viewBook" text="View Books" visible="false" />
                </children>
             </HBox>
 

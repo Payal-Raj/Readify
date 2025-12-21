@@ -110,4 +110,30 @@ public class AdminDashboardController {
         mainContent.getChildren().clear();
         loadUI("/com/example/readify/AddBook.fxml");
     }
+
+    @FXML
+    public void viewBook(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/readify/ViewBooks.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void viewMember(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/readify/ViewMembers.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
