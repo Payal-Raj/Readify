@@ -2,7 +2,10 @@ package com.example.readify;
 
 import com.example.readify.Database.DBConnection;
 import com.example.readify.Models.Book;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -13,14 +16,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.Cursor;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -34,6 +42,8 @@ public class ViewBooksController implements Initializable {
     @FXML
     private JFXComboBox<String> statusCombo;
     @FXML private JFXComboBox<String> sortCombo;
+    @FXML
+    private StackPane stackPane;
 
     private ObservableList<Book> booksList;
 
@@ -82,6 +92,8 @@ public class ViewBooksController implements Initializable {
         ));
 
         implementSearchAndFilter();
+        addDeleteActionColumn();
+
     }
 
     private void loadBooksFromDatabase() {
@@ -153,6 +165,86 @@ public class ViewBooksController implements Initializable {
                 colTitle.setSortType(TableColumn.SortType.DESCENDING);
                 booksTable.getSortOrder().add(colTitle);
             }
+        }
+    }
+
+    private void addDeleteActionColumn() {
+
+        colActions.setCellFactory(param -> new TableCell<>() {
+
+            private final Label deleteLabel = new Label("Delete");
+
+            {
+                deleteLabel.setStyle(
+                        "-fx-text-fill: blue;" +
+                                "-fx-underline: true;"
+                );
+                deleteLabel.setCursor(Cursor.HAND);
+
+                // Click event
+                deleteLabel.setOnMouseClicked(event -> {
+                    Book book = getTableView().getItems().get(getIndex());
+                    showDeleteConfirmation(book);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(deleteLabel);
+                }
+            }
+        });
+    }
+
+    private void showDeleteConfirmation(Book book) {
+
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setHeading(new Label("Confirm Delete"));
+        content.setBody(new Label("Are you sure you want to delete this data?"));
+
+        JFXButton okButton = new JFXButton("OK");
+        JFXButton cancelButton = new JFXButton("Cancel");
+
+        okButton.setStyle("-fx-background-color: #D9534F; -fx-text-fill: white;");
+        cancelButton.setStyle("-fx-background-color: #6c757d; -fx-text-fill: white;");
+
+        JFXDialog dialog = new JFXDialog(
+                stackPane,
+                content,
+                JFXDialog.DialogTransition.CENTER
+        );
+
+        okButton.setOnAction(e -> {
+            deleteBook(book);
+            dialog.close();
+        });
+
+        cancelButton.setOnAction(e -> dialog.close());
+
+        content.setActions(cancelButton, okButton);
+        dialog.show();
+    }
+
+    private void deleteBook(Book book) {
+
+        try {
+            var conn = DBConnection.getConnection();
+            String query = "DELETE FROM books WHERE book_id = ?";
+            var pst = conn.prepareStatement(query);
+            pst.setString(1, book.getBookId());
+
+            int affectedRows = pst.executeUpdate();
+
+            if (affectedRows > 0) {
+                booksList.remove(book); // removes from table
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
