@@ -101,7 +101,7 @@ public class ViewBooksController implements Initializable {
 
         try {
             var conn = DBConnection.getConnection();
-            String query = "SELECT * FROM books";
+            String query = "SELECT * FROM books ORDER BY date_added DESC;";
             var pst = conn.prepareStatement(query);
             var rs = pst.executeQuery();
 

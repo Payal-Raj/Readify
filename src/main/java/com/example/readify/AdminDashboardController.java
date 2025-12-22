@@ -127,7 +127,7 @@ public class AdminDashboardController {
     @FXML
     public void viewMember(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/readify/ViewMembers.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/readify/ViewMembers.FXML"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

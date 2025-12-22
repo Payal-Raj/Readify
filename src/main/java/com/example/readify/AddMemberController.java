@@ -44,8 +44,7 @@ public class AddMemberController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         membershipBox.getItems().addAll(
                 "Student",
-                "Teacher",
-                "General"
+                "Teacher"
         );
         joinDatePicker.setValue(LocalDate.now());
     }

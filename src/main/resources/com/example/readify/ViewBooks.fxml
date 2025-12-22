@@ -14,99 +14,69 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane"
-           prefWidth="754.0"
-           prefHeight="600.0"
-           xmlns="http://javafx.com/javafx/25"
-           xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.example.readify.ViewBooksController">
+<StackPane fx:id="stackPane" prefHeight="600.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.readify.ViewBooksController">
 
     <children>
 
-        <AnchorPane prefHeight="600.0"
-                    prefWidth="754.0"
-                    style="-fx-background-color: linear-gradient(to bottom, #2A4759, #1F3B4D);">
+        <AnchorPane prefHeight="600.0" prefWidth="754.0" style="-fx-background-color: linear-gradient(to bottom, #2A4759, #1F3B4D);">
 
             <children>
 
-                <Label layoutX="266.0" layoutY="21.0"
-                       text="View Books"
-                       textFill="WHITE">
+                <Label layoutX="266.0" layoutY="21.0" text="View Books" textFill="WHITE">
                     <font>
-                        <Font name="Arial Black" size="36.0"/>
+                        <Font name="Arial Black" size="36.0" />
                     </font>
                 </Label>
 
-                <ImageView fx:id="closeTab"
-                           fitHeight="35.0"
-                           fitWidth="36.0"
-                           layoutX="24.0"
-                           layoutY="30.0"
-                           pickOnBounds="true"
-                           onMouseClicked="#onCloseTab">
+                <ImageView fx:id="closeTab" fitHeight="35.0" fitWidth="36.0" layoutX="24.0" layoutY="30.0" onMouseClicked="#onCloseTab" pickOnBounds="true">
                     <image>
-                        <Image url="@Images/leftArrow.png"/>
+                        <Image url="@Images/leftArrow.png" />
                     </image>
                 </ImageView>
 
-                <JFXButton fx:id="adminLogOut"
-                           layoutX="688.0"
-                           layoutY="34.0"
-                           text="Log Out"
-                           onMouseClicked="#handleAdminLogOut"
-                           style="-fx-background-color: #DDDDDD;">
+                <JFXButton fx:id="adminLogOut" layoutX="688.0" layoutY="34.0" onMouseClicked="#handleAdminLogOut" style="-fx-background-color: #DDDDDD;" text="Log Out">
                     <font>
-                        <Font name="Arial Black" size="12.0"/>
+                        <Font name="Arial Black" size="12.0" />
                     </font>
                 </JFXButton>
 
-                <Separator layoutY="90.0" prefWidth="764.0"/>
+                <Separator layoutY="90.0" prefWidth="764.0" />
 
-                <TextField fx:id="searchField"
-                           layoutX="24.0"
-                           layoutY="118.0"
-                           prefWidth="370.0"
-                           promptText="Search Book"
-                           style="-fx-background-color: #DDDDDD;"/>
+                <TextField fx:id="searchField" layoutX="24.0" layoutY="118.0" prefWidth="370.0" promptText="Search Book" style="-fx-background-color: #DDDDDD;" />
+            <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="368.0" layoutY="118.0" opacity="0.54" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 270;">
+               <image>
+                  <Image url="@Images/searchIcon.png" />
+               </image>
+            </ImageView>
 
-                <JFXComboBox fx:id="categoryCombo"
-                             layoutX="412.0"
-                             layoutY="118.0"
-                             prefWidth="100.0"
-                             promptText="Category"
-                             style="-fx-background-color: #DDDDDD;"/>
+                <JFXComboBox fx:id="categoryCombo" layoutX="412.0" layoutY="118.0" prefWidth="100.0" promptText="Category" style="-fx-background-color: #DDDDDD;">
+               <padding>
+                  <Insets left="4.0" />
+               </padding></JFXComboBox>
 
-                <JFXComboBox fx:id="statusCombo"
-                             layoutX="528.0"
-                             layoutY="118.0"
-                             prefWidth="100.0"
-                             promptText="Status"
-                             style="-fx-background-color: #DDDDDD;"/>
+                <JFXComboBox fx:id="statusCombo" layoutX="528.0" layoutY="118.0" prefWidth="100.0" promptText="Status" style="-fx-background-color: #DDDDDD;">
+               <padding>
+                  <Insets left="4.0" />
+               </padding></JFXComboBox>
 
-                <JFXComboBox fx:id="sortCombo"
-                             layoutX="640.0"
-                             layoutY="118.0"
-                             prefWidth="100.0"
-                             promptText="Sort"
-                             style="-fx-background-color: #DDDDDD;"/>
+                <JFXComboBox fx:id="sortCombo" layoutX="640.0" layoutY="118.0" prefWidth="100.0" promptText="Sort" style="-fx-background-color: #DDDDDD;">
+               <padding>
+                  <Insets left="4.0" />
+               </padding></JFXComboBox>
 
-                <TableView fx:id="booksTable"
-                           layoutX="20.0"
-                           layoutY="170.0"
-                           prefWidth="720.0"
-                           prefHeight="420.0">
+                <TableView fx:id="booksTable" layoutX="20.0" layoutY="170.0" prefHeight="420.0" prefWidth="720.0">
 
                     <columns>
-                        <TableColumn fx:id="colBookId" text="Book ID" prefWidth="120"/>
-                        <TableColumn fx:id="colTitle" text="Title" prefWidth="180"/>
-                        <TableColumn fx:id="colAuthor" text="Author" prefWidth="160"/>
-                        <TableColumn fx:id="colCategory" text="Category" prefWidth="150"/>
-                        <TableColumn fx:id="colPublisher" text="Publisher" prefWidth="150"/>
-                        <TableColumn fx:id="colISBN" text="ISBN" prefWidth="160"/>
-                        <TableColumn fx:id="colCopies" text="Copies" prefWidth="100"/>
-                        <TableColumn fx:id="colStatus" text="Status" prefWidth="120"/>
-                        <TableColumn fx:id="colDateAdded" text="Date Added" prefWidth="150"/>
-                        <TableColumn fx:id="colActions" text="Actions" prefWidth="140"/>
+                        <TableColumn fx:id="colBookId" prefWidth="120" text="Book ID" />
+                        <TableColumn fx:id="colTitle" prefWidth="180" text="Title" />
+                        <TableColumn fx:id="colAuthor" prefWidth="160" text="Author" />
+                        <TableColumn fx:id="colCategory" prefWidth="150" text="Category" />
+                        <TableColumn fx:id="colPublisher" prefWidth="150" text="Publisher" />
+                        <TableColumn fx:id="colISBN" prefWidth="160" text="ISBN" />
+                        <TableColumn fx:id="colCopies" prefWidth="100" text="Copies" />
+                        <TableColumn fx:id="colStatus" prefWidth="120" text="Status" />
+                        <TableColumn fx:id="colDateAdded" prefWidth="150" text="Date Added" />
+                        <TableColumn fx:id="colActions" prefWidth="140" text="Actions" />
                     </columns>
 
                 </TableView>
