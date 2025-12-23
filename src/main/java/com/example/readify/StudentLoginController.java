@@ -42,7 +42,7 @@ public class StudentLoginController {
         }
 
         String sql = "SELECT * FROM members WHERE email = ? AND password = ?";
-
+        System.out.println("Username: " + username + ", Password: " + password);
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
 
@@ -56,11 +56,15 @@ public class StudentLoginController {
                         getClass().getResource("/com/example/readify/StudentDashboard.fxml"));
                 Parent root = loader.load();
 
+                StudentDashboardController dashboardController = loader.getController();
+                dashboardController.setStudentName(rs.getString("name")); // Assuming column 'name'
+
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));
                 stage.setTitle("Student Dashboard");
                 stage.setResizable(false);
                 stage.show();
+
 
             } else {
                 showErrorDialog("Login Failed", "Member not found. Please check credentials.");
