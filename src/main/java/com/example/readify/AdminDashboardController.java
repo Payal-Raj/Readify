@@ -27,6 +27,9 @@ public class AdminDashboardController {
     private Label viewMembersLabel;
 
     @FXML
+    private Label ViewIssuedBooksLabel;
+
+    @FXML
     private Label viewBooksLabel;
 
     @FXML
@@ -55,6 +58,7 @@ public class AdminDashboardController {
             sideMenu.setPrefWidth(150.0);
             mainContent.setLayoutX(150.0);
             viewMembersLabel.setVisible(true);
+            ViewIssuedBooksLabel.setVisible(true);
             viewBooksLabel.setVisible(true);
             addLabel.setVisible(true);
 
@@ -69,6 +73,7 @@ public class AdminDashboardController {
             sideMenu.setPrefWidth(46.0);
             mainContent.setLayoutX(46.0);
             viewMembersLabel.setVisible(false);
+            ViewIssuedBooksLabel.setVisible(false);
             viewBooksLabel.setVisible(false);
             addLabel.setVisible(false);
 
@@ -109,6 +114,19 @@ public class AdminDashboardController {
     private void AddBook() {
         mainContent.getChildren().clear();
         loadUI("/com/example/readify/AddBook.fxml");
+    }
+
+    @FXML
+    public void ViewIssuedBooks(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/readify/ViewBooks.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
