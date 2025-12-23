@@ -58,6 +58,7 @@ public class StudentLoginController {
 
                 StudentDashboardController dashboardController = loader.getController();
                 dashboardController.setStudentName(rs.getString("name")); // Assuming column 'name'
+                dashboardController.setStudentEmail(rs.getString("email"));
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));
