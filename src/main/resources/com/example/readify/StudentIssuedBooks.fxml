@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="stackPane" prefHeight="600.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.readify.StudentIssuedBooksController">
+
+    <children>
+        <AnchorPane prefHeight="600.0" prefWidth="754.0" style="-fx-background-color: linear-gradient(to bottom, #2A4759, #1F3B4D);">
+
+            <children>
+                <Label layoutX="220.0" layoutY="21.0" text="Issued Books" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Black" size="36.0" />
+                    </font>
+                </Label>
+
+                <ImageView fx:id="closeTab" fitHeight="35.0" fitWidth="36.0" layoutX="24.0" layoutY="30.0" onMouseClicked="#onCloseTab" pickOnBounds="true">
+                    <image>
+                        <Image url="@Images/leftArrow.png" />
+                    </image>
+                </ImageView>
+
+                <JFXButton fx:id="logOutBtn" layoutX="688.0" layoutY="34.0" onMouseClicked="#handleLogOut" style="-fx-background-color: #DDDDDD;" text="Log Out">
+                    <font>
+                        <Font name="Arial Black" size="12.0" />
+                    </font>
+                </JFXButton>
+
+                <Separator layoutY="90.0" prefWidth="764.0" />
+
+                <TextField fx:id="searchField" layoutX="24.0" layoutY="118.0" prefWidth="370.0" promptText="Search Issued Book" style="-fx-background-color: #DDDDDD;" />
+                <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="368.0" layoutY="118.0" opacity="0.54" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 270;">
+                    <image>
+                        <Image url="@Images/searchIcon.png" />
+                    </image>
+                </ImageView>
+
+                <TableView fx:id="issuedBooksTable" layoutX="20.0" layoutY="170.0" prefHeight="420.0" prefWidth="720.0">
+                    <columns>
+                        <TableColumn fx:id="colBookId" prefWidth="180" text="Book ID" />
+                        <TableColumn fx:id="colBookName" prefWidth="250" text="Book Name" />
+                        <TableColumn fx:id="colIssuedDate" prefWidth="150" text="Issued Date" />
+                        <TableColumn fx:id="colDueDate" prefWidth="150" text="Due Date" />
+                        <TableColumn fx:id="colActions" prefWidth="140" text="Actions" />
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>

@@ -34,6 +34,7 @@ public class StudentDashboardController {
             Parent root = loader.load();
             StudentBooksController controller = loader.getController();
 
+            // Pass the student info
             controller.setStudentId(this.studentId);
             controller.setStudentName(this.StudentName.getText());
             controller.setStudentEmail(this.studentEmail);
@@ -48,9 +49,21 @@ public class StudentDashboardController {
 
     @FXML
     private void IssuedBooks(MouseEvent event) {
-        System.out.println("Issued Books clicked");
-        // TODO: open issued books page
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/readify/StudentIssuedBooks.fxml"));
+            Parent root = loader.load();
+            StudentIssuedBooksController controller = loader.getController();
+            controller.setMemberId(this.studentId);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
 
     @FXML
