@@ -5,6 +5,8 @@ import com.example.readify.Database.DBConnection;
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -22,7 +25,7 @@ import java.time.LocalDate;
 
 public class StudentBooksController {
 
-    // Student info from dashboard
+    // Student info
     private int studentId;
     private String studentName;
     private String studentEmail;
@@ -40,6 +43,7 @@ public class StudentBooksController {
     @FXML private TableColumn<Book, Integer> colCopies;
     @FXML private TableColumn<Book, String> colStatus;
     @FXML private TableColumn<Book, String> colActions;
+    @FXML private TextField searchField;
 
     private final ObservableList<Book> booksList = FXCollections.observableArrayList();
 
@@ -48,6 +52,7 @@ public class StudentBooksController {
         setupColumns();
         loadBooks();
         addIssueButton();
+        implementSearch();
     }
 
     private void setupColumns() {
@@ -89,7 +94,6 @@ public class StudentBooksController {
 
     private void addIssueButton() {
         colActions.setCellFactory(param -> new TableCell<>() {
-
             private final JFXButton issueBtn = new JFXButton("Issue");
 
             {
@@ -103,12 +107,10 @@ public class StudentBooksController {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
-
                 if (empty) {
                     setGraphic(null);
                 } else {
                     Book book = getTableView().getItems().get(getIndex());
-
                     if (book.getTotalCopies() <= 0) {
                         issueBtn.setDisable(true);
                         issueBtn.setText("Unavailable");
@@ -116,7 +118,6 @@ public class StudentBooksController {
                         issueBtn.setDisable(false);
                         issueBtn.setText("Issue");
                     }
-
                     setGraphic(issueBtn);
                 }
             }
@@ -130,27 +131,21 @@ public class StudentBooksController {
         }
 
         try (Connection conn = DBConnection.getConnection()) {
-
-            // Insert into issued_books
             String insertSql = "INSERT INTO issued_books (book_id, member_id, issued_date, due_date) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(insertSql);
             ps.setString(1, book.getBookId());
-            ps.setInt(2, this.studentId); // Use passed studentId
+            ps.setInt(2, this.studentId);
             ps.setDate(3, java.sql.Date.valueOf(LocalDate.now()));
-            ps.setDate(4, java.sql.Date.valueOf(LocalDate.now().plusDays(14))); // 2-week due
+            ps.setDate(4, java.sql.Date.valueOf(LocalDate.now().plusDays(14)));
 
             int inserted = ps.executeUpdate();
-
             if (inserted > 0) {
-                // Reduce total copies in books table
                 String updateSql = "UPDATE books SET total_copies = total_copies - 1 WHERE book_id = ?";
                 PreparedStatement psUpdate = conn.prepareStatement(updateSql);
                 psUpdate.setString(1, book.getBookId());
                 psUpdate.executeUpdate();
 
                 showAlert("Success", "Book issued successfully!");
-
-                // Refresh table
                 loadBooks();
             }
 
@@ -168,6 +163,25 @@ public class StudentBooksController {
         alert.showAndWait();
     }
 
+    // ================== Search functionality ==================
+    private void implementSearch() {
+        FilteredList<Book> filteredData = new FilteredList<>(booksList, b -> true);
+
+        searchField.textProperty().addListener((obs, oldVal, newVal) -> {
+            String lower = newVal.toLowerCase();
+            filteredData.setPredicate(book -> {
+                if (lower.isEmpty()) return true;
+                return book.getTitle().toLowerCase().contains(lower) ||
+                        book.getAuthor().toLowerCase().contains(lower) ||
+                        book.getCategory().toLowerCase().contains(lower);
+            });
+        });
+
+        SortedList<Book> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(booksTable.comparatorProperty());
+        booksTable.setItems(sortedData);
+    }
+
     @FXML
     public void handleStudentLogout(MouseEvent event) {
         try {
@@ -177,9 +191,7 @@ public class StudentBooksController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
     }
 
     @FXML
@@ -202,5 +214,7 @@ public class StudentBooksController {
             e.printStackTrace();
         }
     }
-
 }
+
+
+
