@@ -119,7 +119,7 @@ public class AdminDashboardController {
     @FXML
     public void ViewIssuedBooks(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/readify/ViewBooks.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/readify/ViewIssuedBooks.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

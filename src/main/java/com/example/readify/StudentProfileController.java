@@ -2,9 +2,15 @@ package com.example.readify;
 
 import com.example.readify.Database.DBConnection;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,6 +51,21 @@ public class StudentProfileController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void handleStudentLogout(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(
+                    getClass().getResource("/com/example/readify/launchScreen.fxml")
+            );
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     // Handle password change
     @FXML
@@ -93,4 +114,16 @@ public class StudentProfileController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+    @FXML
+    public void onCloseTab(MouseEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/readify/StudentDashboard.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
