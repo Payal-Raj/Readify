@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.readify.AdminDashboardController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.readify.AdminDashboardController">
    <children>
       <!-- SIDE MENU -->
       <VBox fx:id="sideMenu" onMouseEntered="#expandMenu" onMouseExited="#shrinkMenu" prefHeight="600.0" prefWidth="46.0" style="-fx-background-color: #DDDDDD;">
@@ -26,17 +26,41 @@
                   <Insets left="4" top="20" />
                </VBox.margin>
             </ImageView>
+            <HBox prefHeight="44.0" prefWidth="62.0">
+               <VBox.margin>
+                  <Insets top="140.0" />
+               </VBox.margin>
+               <children>
+                  <ImageView fx:id="IssuedBooks" fitHeight="36.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/issuedBook.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets right="30.0" top="-10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label fx:id="ViewIssuedBooksLabel" onMouseClicked="#ViewIssuedBooks" text="View Members" visible="false" />
+               </children>
+            </HBox>
+            <Separator style="-fx-background-color: black;">
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Separator>
 
             <!-- ADD MEMBER ICON WITH LABEL -->
             <HBox alignment="CENTER_LEFT" spacing="10.0">
                <VBox.margin>
-                  <Insets left="4" top="160" />
+                  <Insets left="4.0" top="15.0" />
                </VBox.margin>
                <children>
                   <ImageView fx:id="addMemberIcon" fitHeight="36.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Images/member.jpg" />
                      </image>
+                     <HBox.margin>
+                        <Insets bottom="4.0" top="-10.0" />
+                     </HBox.margin>
                   </ImageView>
                   <Label fx:id="viewMembersLabel" onMouseClicked="#viewMember" text="View Members" visible="false" />
                </children>
@@ -44,7 +68,7 @@
 
             <Separator style="-fx-background-color: black;">
                <VBox.margin>
-                  <Insets top="10" />
+                  <Insets top="10.0" />
                </VBox.margin>
             </Separator>
 
