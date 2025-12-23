@@ -21,7 +21,7 @@
                     <children>
                         <VBox prefHeight="607.0" prefWidth="455.0" style="-fx-background-color: #2A4759;">
                             <children>
-                                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Student  Login" wrappingWidth="233.33671951293945">
+                                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Student  Login" wrappingWidth="266.33671951293945">
                                     <VBox.margin>
                                         <Insets left="90.0" top="100.0" />
                                     </VBox.margin>
