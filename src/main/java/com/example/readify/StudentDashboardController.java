@@ -10,11 +10,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class StudentDashboardController {
+    private int studentId;
     @FXML
     private Text StudentName;
-
     private String studentEmail;
 
+    public void setStudentId(int id) {
+        this.studentId = id;
+    }
     public void setStudentName(String name) {
         StudentName.setText(name);
     }
@@ -24,7 +27,23 @@ public class StudentDashboardController {
     @FXML
     private void AvailableBooks(MouseEvent event) {
         System.out.println("Available Books clicked");
-        // TODO: open available books page
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/readify/StudentBooks.fxml")
+            );
+            Parent root = loader.load();
+            StudentBooksController controller = loader.getController();
+
+            controller.setStudentId(this.studentId);
+            controller.setStudentName(this.StudentName.getText());
+            controller.setStudentEmail(this.studentEmail);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -33,25 +52,6 @@ public class StudentDashboardController {
         // TODO: open issued books page
     }
 
-//    @FXML
-//    private void handleMyProfile(MouseEvent event) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/readify/StudentProfile.fxml"));
-//            Parent root = loader.load();
-//
-//            StudentProfileController profileController = loader.getController();
-//            profileController.setStudentEmail(this.studentEmail); // Pass the email of logged-in student
-//
-//            Stage stage = new Stage();
-//            stage.setScene(new Scene(root));
-//            stage.setTitle("My Profile");
-//            stage.setResizable(false);
-//            stage.show();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     @FXML
     public void handleMyProfile(MouseEvent event) {
