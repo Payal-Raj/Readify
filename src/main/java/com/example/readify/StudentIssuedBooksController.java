@@ -200,14 +200,14 @@ public class StudentIssuedBooksController implements Initializable {
     private void handleRenew(IssuedBooks book) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Renew Book");
-        alert.setHeaderText("Do you want to renew this book for 2 more weeks?");
+        alert.setHeaderText("Do you want to renew this book for 1 day more?");
         alert.setContentText(book.getBookName());
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
                 var conn = DBConnection.getConnection();
-                LocalDate newDue = book.getDueDate().plusWeeks(2);
+                LocalDate newDue = book.getDueDate().plusDays(1);
                 var pst = conn.prepareStatement("UPDATE issued_books SET due_date = ? WHERE book_id = ? AND member_id = ?");
                 pst.setDate(1, Date.valueOf(newDue));
                 pst.setString(2, book.getBookId());

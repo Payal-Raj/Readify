@@ -89,8 +89,6 @@ public class AddMemberController implements Initializable {
         return phone.matches("\\d{10,13}");
     }
 
-
-
     @FXML
     private void handleSaveMember() {
         String name = nameField.getText().trim();

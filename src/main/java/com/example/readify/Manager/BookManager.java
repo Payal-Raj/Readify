@@ -12,11 +12,29 @@ public class BookManager {
     public static boolean addBook(Book book) {
 
         if (bookMap.containsKey(book.getBookId())) {
-            return false; // duplicate
+            return false;
         }
 
-        bookList.add(book);                    // ArrayList ADD
-        bookMap.put(book.getBookId(), book);   // HashMap ADD
+        bookList.add(book);
+        bookMap.put(book.getBookId(), book);
         return true;
     }
+
+    /*DSA
+        public static ArrayList<Book> getAllBooks() {
+            return new ArrayList<>(bookList);
+        }
+
+        public static boolean removeBook(String bookId) {
+            Book book = bookMap.remove(bookId);
+            if (book != null) {
+                bookList.remove(book);
+                return true;
+            }
+            return false;
+        }
+
+
+
+     */
 }

@@ -29,7 +29,7 @@
                               <Font name="Cambria Bold" size="36.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="233.33671951293945">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="233.33671951293945">
                            <font>
                               <Font name="Cambria Bold" size="22.0" />
                            </font>

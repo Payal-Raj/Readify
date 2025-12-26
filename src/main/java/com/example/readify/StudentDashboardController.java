@@ -10,34 +10,22 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class StudentDashboardController {
-    private int studentId;
+
     @FXML
     private Text StudentName;
-    private String studentEmail;
 
-    public void setStudentId(int id) {
-        this.studentId = id;
+    @FXML
+    public void initialize() {
+        // Set student name from session
+        StudentName.setText(StudentSession.getInstance().getStudentName());
     }
-    public void setStudentName(String name) {
-        StudentName.setText(name);
-    }
-    public void setStudentEmail(String email) {
-        this.studentEmail = email;
-    }
+
     @FXML
     private void AvailableBooks(MouseEvent event) {
-        System.out.println("Available Books clicked");
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/example/readify/StudentBooks.fxml")
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/readify/StudentBooks.fxml"));
             Parent root = loader.load();
-            StudentBooksController controller = loader.getController();
-
-            // Pass the student info
-            controller.setStudentId(this.studentId);
-            controller.setStudentName(this.StudentName.getText());
-            controller.setStudentEmail(this.studentEmail);
+            // Controller will fetch session automatically
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -53,7 +41,7 @@ public class StudentDashboardController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/readify/StudentIssuedBooks.fxml"));
             Parent root = loader.load();
             StudentIssuedBooksController controller = loader.getController();
-            controller.setMemberId(this.studentId);
+            controller.setMemberId(StudentSession.getInstance().getStudentId());
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -63,18 +51,14 @@ public class StudentDashboardController {
             e.printStackTrace();
         }
     }
-
-
 
     @FXML
     public void handleMyProfile(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/example/readify/StudentProfile.fxml")
-            );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/readify/StudentProfile.fxml"));
             Parent root = loader.load();
             StudentProfileController controller = loader.getController();
-            controller.setStudentEmail(this.studentEmail);
+            controller.setStudentEmail(StudentSession.getInstance().getStudentEmail());
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -84,7 +68,4 @@ public class StudentDashboardController {
             e.printStackTrace();
         }
     }
-
-
-
 }

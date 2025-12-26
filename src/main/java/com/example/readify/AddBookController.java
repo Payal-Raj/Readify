@@ -27,7 +27,6 @@ import java.util.ResourceBundle;
 
 public class AddBookController implements Initializable {
 
-    @FXML private TextField bookIdField;
     @FXML private TextField titleField;
     @FXML private TextField authorField;
     @FXML private ComboBox<String> categoryBox;
@@ -41,7 +40,6 @@ public class AddBookController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         categoryBox.getItems().addAll(
                 "Programming",
                 "Science",
@@ -59,26 +57,26 @@ public class AddBookController implements Initializable {
     }
 
 
-    public void addBook(String bookId, String title, String author, String category,
+    public void addBook(String title, String author, String category,
                         String publisher, String isbn, int copies,
                         String status, LocalDate dateAdded) {
 
         String sql = "INSERT INTO books " +
-                "(book_id, title, author, category, publisher, isbn, total_copies, status, date_added) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "(title, author, category, publisher, isbn, total_copies, status, date_added) " +
+                "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
 
-            pst.setString(1, bookId);
-            pst.setString(2, title);
-            pst.setString(3, author);
-            pst.setString(4, category);
-            pst.setString(5, publisher);
-            pst.setString(6, isbn);
-            pst.setInt(7, copies);
-            pst.setString(8, status);
-            pst.setDate(9, java.sql.Date.valueOf(dateAdded));
+//            pst.setString(1, bookId);
+            pst.setString(1, title);
+            pst.setString(2, author);
+            pst.setString(3, category);
+            pst.setString(4, publisher);
+            pst.setString(5, isbn);
+            pst.setInt(6, copies);
+            pst.setString(7, status);
+            pst.setDate(8, java.sql.Date.valueOf(dateAdded));
 
             pst.executeUpdate();
             System.out.println("Book added successfully!");
@@ -88,9 +86,7 @@ public class AddBookController implements Initializable {
         }
     }
 
-
     private void clearFields() {
-        bookIdField.clear();
         titleField.clear();
         authorField.clear();
         publisherField.clear();
@@ -101,11 +97,9 @@ public class AddBookController implements Initializable {
         dateAddedPicker.setValue(LocalDate.now());
     }
 
-
     @FXML
     private void handleSaveBook() {
 
-        String bookId = bookIdField.getText();
         String title = titleField.getText();
         String author = authorField.getText();
         String category = categoryBox.getValue();
@@ -116,10 +110,10 @@ public class AddBookController implements Initializable {
         LocalDate dateAdded = dateAddedPicker.getValue();
 
 
-        if (bookId.isEmpty()) {
-            showJFXAlert("Validation Error", "Please enter the Book ID.");
-            return;
-        }
+//        if (bookId.isEmpty()) {
+//            showJFXAlert("Validation Error", "Please enter the Book ID.");
+//            return;
+//        }
         if (title.isEmpty()) {
             showJFXAlert("Validation Error", "Please enter the book title.");
             return;
@@ -155,7 +149,6 @@ public class AddBookController implements Initializable {
         }
 
         Book book = new Book(
-                bookId,
                 title,
                 author,
                 category,
@@ -171,7 +164,7 @@ public class AddBookController implements Initializable {
         }
 
         try {
-            addBook(bookId, title, author, category, publisher, isbn, copies, status, dateAdded);
+            addBook(title, author, category, publisher, isbn, copies, status, dateAdded);
             showJFXAlert("Success", "Book added successfully!");
             clearFields();
         } catch (Exception e) {
@@ -179,7 +172,6 @@ public class AddBookController implements Initializable {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     public void handleAdminLogOut(MouseEvent event) {
@@ -201,7 +193,6 @@ public class AddBookController implements Initializable {
             e.printStackTrace();
         }
     }
-
 
     private void showJFXAlert(String title, String message) {
 

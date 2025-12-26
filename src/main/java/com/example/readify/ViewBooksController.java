@@ -65,7 +65,7 @@ public class ViewBooksController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        //Binding
+        //Binding(connect one to another)
         colBookId.setCellValueFactory(new PropertyValueFactory<>("bookId"));
         colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         colAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
@@ -80,6 +80,7 @@ public class ViewBooksController implements Initializable {
         booksTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
 
         loadBooksFromDatabase();
+        //loadBooksFromManager();
 
         categoryCombo.setItems(FXCollections.observableArrayList(
                 "Programming", "Science", "Literature", "History", "Islamic Studies"
@@ -127,6 +128,13 @@ public class ViewBooksController implements Initializable {
         }
     }
 
+    /*
+    private void loadBooksFromManager() {
+        booksList = FXCollections.observableArrayList(BookManager.getAllBooks());
+        booksTable.setItems(booksList);
+    }
+
+     */
     private void implementSearchAndFilter() {
         FilteredList<Book> filteredData = new FilteredList<>(booksList, b -> true);
 
@@ -247,6 +255,25 @@ public class ViewBooksController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /*
+    private void deleteBook(Book book) {
+        if (BookManager.removeBook(book.getBookId())) {
+            booksList.setAll(BookManager.getAllBooks());
+
+            try {
+                var conn = DBConnection.getConnection();
+                String query = "DELETE FROM books WHERE book_id = ?";
+                var pst = conn.prepareStatement(query);
+                pst.setString(1, book.getBookId());
+                pst.executeUpdate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+       }
+}
+
+     */
 
     @FXML
     public void handleAdminLogOut(MouseEvent event) {

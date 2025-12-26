@@ -1,4 +1,5 @@
 package com.example.readify;
+
 import com.example.readify.Database.DBConnection;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -21,6 +22,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class StudentLoginController {
+
     @FXML
     private TextField StudentUserName;
 
@@ -43,6 +45,7 @@ public class StudentLoginController {
 
         String sql = "SELECT * FROM members WHERE email = ? AND password = ?";
         System.out.println("Username: " + username + ", Password: " + password);
+
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
 
@@ -52,21 +55,19 @@ public class StudentLoginController {
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
-                FXMLLoader loader = new FXMLLoader(
-                        getClass().getResource("/com/example/readify/StudentDashboard.fxml"));
-                Parent root = loader.load();
+                // Set session
+                StudentSession session = StudentSession.getInstance();
+                session.setStudentId(rs.getInt("id"));
+                session.setStudentName(rs.getString("name"));
+                session.setStudentEmail(rs.getString("email"));
 
-                StudentDashboardController dashboardController = loader.getController();
-                dashboardController.setStudentName(rs.getString("name")); // Assuming column 'name'
-                dashboardController.setStudentEmail(rs.getString("email"));
-                dashboardController.setStudentId(rs.getInt("id"));
-
+                // Load dashboard
+                Parent root = FXMLLoader.load(getClass().getResource("/com/example/readify/StudentDashboard.fxml"));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));
                 stage.setTitle("Student Dashboard");
                 stage.setResizable(false);
                 stage.show();
-
 
             } else {
                 showErrorDialog("Login Failed", "Member not found. Please check credentials.");

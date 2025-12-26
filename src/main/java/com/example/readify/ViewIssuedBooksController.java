@@ -93,7 +93,6 @@ public class ViewIssuedBooksController implements Initializable {
                 LocalDate issuedDate = rs.getDate("issued_date").toLocalDate();
                 LocalDate dueDate = rs.getDate("due_date").toLocalDate();
 
-                // Calculate penalty
                 long daysOverdue = ChronoUnit.DAYS.between(dueDate, LocalDate.now());
                 int penalty = daysOverdue > 0 ? (int) (daysOverdue * 200) : 0;
 
@@ -119,7 +118,6 @@ public class ViewIssuedBooksController implements Initializable {
     private void implementSearchAndSort() {
         FilteredList<IssuedBooks> filteredData = new FilteredList<>(issuedBooksList, b -> true);
 
-        // Search listener (search on book name or member name)
         searchField.textProperty().addListener((obs, oldVal, newVal) -> {
             filteredData.setPredicate(issuedBook -> {
                 String searchText = newVal.toLowerCase();

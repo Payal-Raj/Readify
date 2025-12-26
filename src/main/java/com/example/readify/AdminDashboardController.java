@@ -24,10 +24,10 @@ public class AdminDashboardController {
     private VBox mainContent;
 
     @FXML
-    private Label viewMembersLabel;
+    private Label ViewIssuedBooksLabel;
 
     @FXML
-    private Label ViewIssuedBooksLabel;
+    private Label viewMembersLabel;
 
     @FXML
     private Label viewBooksLabel;
@@ -35,14 +35,13 @@ public class AdminDashboardController {
     @FXML
     private Label addLabel;
 
-    private boolean isExpanded = false;
-
     @FXML
     private VBox card1;
 
     @FXML
     private VBox card2;
 
+    private boolean isExpanded = false;
 
     private void setCardMargins(double left, double right) {
         Insets newInsets = new Insets(0, right, 0, left);
@@ -80,6 +79,7 @@ public class AdminDashboardController {
             setCardMargins(60, 20);
         }
     }
+
     @FXML
     public void handleAdminLogOut(MouseEvent event) {
         try {
@@ -92,7 +92,6 @@ public class AdminDashboardController {
             e.printStackTrace();
         }
     }
-
 
     private void loadUI(String fxml) {
         try {

@@ -26,6 +26,18 @@ public class Book {
         this.status = status;
         this.dateAdded = dateAdded;
     }
+    public Book(String title, String author, String category,
+                String publisher, String isbn, int totalCopies,
+                String status, LocalDate dateAdded) {
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.publisher = publisher;
+        this.isbn = isbn;
+        this.totalCopies = totalCopies;
+        this.status = status;
+        this.dateAdded = dateAdded;
+    }
 
     public String getBookId() {
         return bookId;

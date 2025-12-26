@@ -114,7 +114,6 @@
       </VBox>
 
       <!-- MAIN CONTENT AREA -->
-      <!-- MAIN CONTENT AREA -->
       <VBox fx:id="mainContent" layoutX="46.0" prefHeight="600.0" prefWidth="754.0" spacing="20" style="-fx-background-color: #2A4759;">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Dashboard" textAlignment="CENTER" wrappingWidth="742.3589782714844">
@@ -143,7 +142,7 @@
                </VBox.margin>
             </Separator>
 
-            <!-- HBOX for side-by-side cards -->
+            <!--  cards -->
             <HBox spacing="20">
                <children>
                   <!-- CARD 1 -->

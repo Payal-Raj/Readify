@@ -36,6 +36,13 @@ public class AdminLoginController {
         String username = AdminUserName.getText();
         String password = AdminPassword.getText();
 
+        if (username.isEmpty()) {
+            showErrorDialog("Validation Error", "Please enter email.");
+            return;
+        }else if(password.isEmpty()){
+            showErrorDialog("Login Failed", "Please enter Password");
+            return;
+        }
         if (username.equals(ADMIN_USERNAME) && password.equals(ADMIN_PASSWORD)) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/readify/AdminDashboard.fxml"));
@@ -46,10 +53,7 @@ public class AdminLoginController {
                 stage.setTitle("Admin Dashboard");
                 stage.setResizable(false);
 
-// Show the stage
                 stage.show();
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -72,7 +76,6 @@ public class AdminLoginController {
         }
     }
 
-    // Method to show JFoenix error dialog
     private void showErrorDialog(String title, String message) {
         JFXDialogLayout dialogLayout = new JFXDialogLayout();
         dialogLayout.setHeading(new Text(title));
